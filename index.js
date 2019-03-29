@@ -15,4 +15,5 @@ app.use(passport.initialize()); // Used to initialize passport
 app.use(passport.session()); // Used to persist login sessions
 require("./routes/authRoutes")(app);
 
-app.listen(process.env.PORT || 3000, () => console.log(`listening on port ${port}!`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`listening on port ${port}!`));
