@@ -16,11 +16,11 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: keys.googleCallback,
+      // proxy: true,
       passReqToCallback: true
     },
     async function(request, accessToken, refreshToken, profile, done) {
-
       let existingUser = await User.query().where("google_id", profile.id);
       if (existingUser.length === 0) {
         let newUser = await User.query().insert({ google_id: profile.id });
@@ -28,7 +28,6 @@ passport.use(
       } else {
         done(null, existingUser);
       }
-      
     }
   )
 );
