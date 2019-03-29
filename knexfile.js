@@ -5,5 +5,8 @@ const keys = require("./config/keys");
 pg.defaults.ssl = true;
 module.exports = {
   client: "pg",
-  connection: keys.databaseURL
+  connection:
+    process.env.NODE_ENV == "production"
+      ? process.env.DATABASE_URL
+      : keys.databaseURL
 };
